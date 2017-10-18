@@ -21,8 +21,9 @@ class MyHandler(PatternMatchingEventHandler):
             path/to/observed/file
         """
         # the file will be processed there
-        shutil.copy2(event.src_path, '/media/pi/MICROBIT')
-        print event.src_path, event.event_type   # print now only for degug
+        if os.path.isdir('/media/pi/MICROBIT'):
+            shutil.copy2(event.src_path, '/media/pi/MICROBIT')
+            print event.src_path, event.event_type   # print now only for debug
 
     def on_modified(self, event):
         self.process(event)
